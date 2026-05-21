@@ -13,22 +13,11 @@ if (!is_dir($outputDir) && !mkdir($outputDir, 0775, true) && !is_dir($outputDir)
 }
 
 $outputPath = $outputDir . '/basic-example.docx';
-$imagePath = $outputDir . '/example-image.png';
+$imagePath = __DIR__ . '/general-img-landscape.png';
 
-file_put_contents(
-    $imagePath,
-    base64_decode(
-        'iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAIAAABRTy6nAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJ'
-        . 'bWFnZVJlYWR5ccllPAAAApVJREFUeNrs3MENgDAMBEH//3YBJfUgxB62QJcdFFBsZzvWecC7e72/'
-        . 'Af4pYASDgBEMAkYwCBjBIGAEg4ARDALGAgYBIxgEjGAQMIJBwAgGASMYPJ5vD7ivM2s/eZ7P8wPD'
-        . 'MxgEjGAQMIJBwAgGASMYPHu63+x5YHgGg4ARDALGAgYBIxgEjGAQMIJBwAgGASMYBIxgEDCCQcAI'
-        . 'BgEjGASMYPB4fdDzwPAMBgljAINEYJAwMkgYGSQMDZL2m0iz/F8q/71x/28Uz2CQMAaBwCBhZJAw'
-        . 'MkgYGSSMDJLGAcCh/wJGMGgYAQxikDAySBgZJIwMEkYGCWMAYwGDhBGMAgYwSBgZJAwMkgYGSQM'
-        . 'DJKGAcaTAQYwSBgBI2AEg4ARDALGAgYBIxgEjGAQMIJBwAgGASMYBIxgEDCCQcAIBgEjGASMYPD7'
-        . 'AAD//wMARXsEDfUY7uUAAAAASUVORK5CYII=',
-        true
-    )
-);
+if (!is_file($imagePath)) {
+    throw new RuntimeException(sprintf('Example image file does not exist: %s', $imagePath));
+}
 
 $builder = new DocxBuilder([
     'format' => 'a4',
@@ -89,8 +78,8 @@ $builder
     ])
     ->addParagraph('Images can be embedded from a local image path.')
     ->addImage($imagePath, [
-        'width' => 200,
-        'height' => 200,
+        'width' => 360,
+        'height' => 240,
         'alignment' => 'center',
         'altText' => 'Example image',
     ])

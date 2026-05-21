@@ -43,27 +43,35 @@ class ImageElement extends DocxElement
     public function toXml(RenderContext $context): string
     {
         $renderedImage = $context->addImage($this->imagePath);
+        $widthEmu = $this->width * 9525; // Convert pixels to EMUs
+        $heightEmu = $this->height * 9525; // Convert pixels to EMUs
 
         return sprintf(
-            '<w:p>%s<w:r><w:drawing><wp:inline>
+            '<w:p>%s<w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0">
             <wp:extent cx="%d" cy="%d"/>
+            <wp:effectExtent l="0" t="0" r="0" b="0"/>
             <wp:docPr id="%d" name="Image%d"%s/>
+            <wp:cNvGraphicFramePr><a:graphicFrameLocks noChangeAspect="1"/></wp:cNvGraphicFramePr>
             <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
             <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
             <pic:nvPicPr><pic:cNvPr id="%d" name="Image%d"/>
             <pic:cNvPicPr/></pic:nvPicPr>
-            <pic:blipFill><a:blip r:embed="%s"/></pic:blipFill>
-            <pic:spPr/></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>',
+            <pic:blipFill><a:blip r:embed="%s"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>
+            <pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="%d" cy="%d"/></a:xfrm>
+            <a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic>
+            </a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>',
             $this->renderParagraphProperties(),
-            $this->width * 9525, // Convert pixels to EMUs
-            $this->height * 9525, // Convert pixels to EMUs
+            $widthEmu,
+            $heightEmu,
             $renderedImage['imageNumber'],
             $renderedImage['imageNumber'],
             $this->renderAltTextAttribute(),
             $renderedImage['imageNumber'],
             $renderedImage['imageNumber'],
-            $renderedImage['relationshipId']
+            $renderedImage['relationshipId'],
+            $widthEmu,
+            $heightEmu
         );
     }
 

@@ -44,8 +44,14 @@ final class ImageElementTest extends TestCase
         $xml = $image->toXml(new RenderContext());
 
         self::assertStringContainsString('<w:p><w:pPr><w:jc w:val="center"/></w:pPr><w:r>', $xml);
+        self::assertStringContainsString('<wp:inline distT="0" distB="0" distL="0" distR="0">', $xml);
         self::assertStringContainsString('<wp:extent cx="952500" cy="476250"/>', $xml);
+        self::assertStringContainsString('<wp:effectExtent l="0" t="0" r="0" b="0"/>', $xml);
         self::assertStringContainsString('<wp:docPr id="1" name="Image1" descr="Diagram &amp; chart"/>', $xml);
+        self::assertStringContainsString('<wp:cNvGraphicFramePr><a:graphicFrameLocks noChangeAspect="1"/></wp:cNvGraphicFramePr>', $xml);
+        self::assertStringContainsString('<pic:blipFill><a:blip r:embed="rId5"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>', $xml);
+        self::assertStringContainsString('<a:xfrm><a:off x="0" y="0"/><a:ext cx="952500" cy="476250"/></a:xfrm>', $xml);
+        self::assertStringContainsString('<a:prstGeom prst="rect"><a:avLst/></a:prstGeom>', $xml);
     }
 
     public function testRendersImageWithoutOptionalOptions(): void
