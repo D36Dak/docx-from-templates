@@ -24,6 +24,12 @@ The package is designed around a lightweight document model and bundled OpenXML 
 - PHP `zip` extension
 - PHP `dom` extension
 
+## Public API
+
+The supported public API is limited to `DocxBuilder`, `ParagraphBuilder`, and `ParagraphElement`.
+`ParagraphElement` is public as the value returned by `ParagraphBuilder::build()` and accepted by `DocxBuilder`.
+Other classes are implementation details and are marked `@internal`; they may change without a backward compatibility promise.
+
 ## Installation
 
 This package is installed via Composer. To add a dependency to `docx-builder` in your project run the following command:

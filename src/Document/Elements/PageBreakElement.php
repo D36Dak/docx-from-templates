@@ -6,6 +6,9 @@ namespace D36Dak\DocxBuilder\Document\Elements;
 
 use D36Dak\DocxBuilder\Renderer\RenderContext;
 
+/**
+ * @internal
+ */
 class PageBreakElement extends DocxElement
 {
     public function toXml(RenderContext $context): string

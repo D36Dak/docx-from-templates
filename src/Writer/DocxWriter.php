@@ -14,6 +14,9 @@ use RuntimeException;
 use SplFileInfo;
 use ZipArchive;
 
+/**
+ * @internal
+ */
 class DocxWriter
 {
     public function write(string $outputPath, string $documentXml, RenderContext $context): void

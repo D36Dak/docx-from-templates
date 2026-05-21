@@ -9,6 +9,9 @@ use D36Dak\DocxBuilder\Document\Elements\ParagraphElement;
 use D36Dak\DocxBuilder\Renderer\RenderContext;
 use InvalidArgumentException;
 
+/**
+ * @internal
+ */
 class DocxDocument
 {
     private const PAGE_FORMATS = [

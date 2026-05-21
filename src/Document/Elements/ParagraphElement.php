@@ -47,6 +47,8 @@ class ParagraphElement extends DocxElement
      *     underline?: bool,
      * } $options
      * @param array<mixed>|null $textRuns
+     *
+     * @internal Use ParagraphBuilder to create paragraph elements.
      */
     public function __construct(
         string $text,
@@ -82,6 +84,8 @@ class ParagraphElement extends DocxElement
      *     italic?: bool,
      *     underline?: bool,
      * } $options
+     *
+     * @internal Use ParagraphBuilder to create paragraph elements.
      */
     public static function fromTextRuns(array $textRuns, array $options = []): self
     {
@@ -109,6 +113,9 @@ class ParagraphElement extends DocxElement
         return $normalizedTextRuns;
     }
 
+    /**
+     * @internal
+     */
     public function toXml(RenderContext $context): string
     {
         $xml = '<w:p>';

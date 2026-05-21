@@ -6,6 +6,9 @@ namespace D36Dak\DocxBuilder\Renderer;
 
 use RuntimeException;
 
+/**
+ * @internal
+ */
 final class RenderContext
 {
     private const IMAGE_RELATIONSHIP_TYPE = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships/image';

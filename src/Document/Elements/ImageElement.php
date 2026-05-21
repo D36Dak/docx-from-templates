@@ -6,6 +6,9 @@ namespace D36Dak\DocxBuilder\Document\Elements;
 
 use D36Dak\DocxBuilder\Renderer\RenderContext;
 
+/**
+ * @internal
+ */
 class ImageElement extends DocxElement
 {
     private const ALIGNMENT_VALUES = [
